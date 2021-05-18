@@ -1,10 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const fs = require('fs');
+const shortid = require('shortid');
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
 let graphData = [
     {
@@ -122,6 +125,17 @@ app.delete('/:id', (req, res) => {
         }
     }
     return res.status(404).json({error: 'Graph not found'});
+})
+
+app.post('/', (req, res) => {
+    const { name, data } = req.body;
+    let newGraph = {
+        id: shortid.generate(),
+        name: name,
+        data: data
+    };
+    graphData.push(newGraph);
+    return res.status(200).json({success: 'Created! Good job!'}); // TO DO: check the response
 })
 
 app.listen(3001);
