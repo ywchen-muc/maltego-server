@@ -121,7 +121,8 @@ app.delete('/:id', (req, res) => {
     for (i = 0; i < graphData.length; i++) {
         if(graphData[i].id === id) {
             graphData.splice(i, 1);
-            return res.status(204);
+            return res.send(graphData);
+            // return res.status(204);
         }
     }
     return res.status(404).json({error: 'Graph not found'});
@@ -135,7 +136,8 @@ app.post('/', (req, res) => {
         data: data
     };
     graphData.push(newGraph);
-    return res.status(200).json({success: 'Created! Good job!'}); // TO DO: check the response
+    return res.send(graphData);
+    // return res.status(200).json({success: 'Created! Good job!'}); // TO DO: check the response
 })
 
 app.listen(3001);
