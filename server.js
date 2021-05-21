@@ -1,13 +1,17 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-const fs = require('fs');
+// const bodyParser = require('body-parser');
+// const fs = require('fs');
 const shortid = require('shortid');
 
+const PORT = 3001;
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+// app.use(express.urlencoded({extended: true})); 
+// app.use(bodyParser.json());
+
 
 let graphData = [
     {
@@ -93,27 +97,70 @@ let graphData = [
         }
     }
 ];
-// fs.readFile('./data.json', 'utf8', (err, data) => {
-//     // TODO: try catch
-//     if(err) {
-//         console.log(err);
-//     }
-//     graphData = JSON.parse(data);
-// })
 
-
+processNodeLabel = (graphs) => {
+    for(let i = 0; i< graphs.length; i++){
+        let nodeList = graphs[i].data.nodes;
+        for(let j =0; j < nodeList.length; j++){
+                let convertedLabel = {
+                        "label":{
+                            "value": nodeList[j].label
+                        }
+                    };
+                nodeList[j].style = convertedLabel;
+    }
+        graphs[i].data.nodes = nodeList;  
+    }
+    return graphs;
+};
 app.get('/', (req, res) => {
-    return res.send(graphData)
+    // 5/21 10:32 modified the return:
+    return res.status(200).json(processNodeLabel(graphData));
+    // return res.status.send(graphData)
 })
 
-app.get('/:id', (req, res) => {
-    const {id} = req.params;
+app.get('/:graphId', (req, res) => {
+    const {graphId} = req.params;
     for (i = 0; i < graphData.length; i++) {
-        if(graphData[i].id === id) {
-            return res.json(graphData[i]);
+        if(graphData[i].id === graphId) {
+            return res.status(200).json(graphData[i]);
         } 
     }
     return res.status(400).json('Not found');     
+})
+
+app.get('/node/:searchfield', (req, res) => {
+    const {searchfield} = req.params;
+    let matchedGraph = [];
+    for(let i=0; i< graphData.length; i++){
+        let graph = graphData[i]
+        let nodeList = graph.data.nodes;
+        for(let j=0; j< nodeList.length; j++){
+            if(nodeList[j].label.toLowerCase()  === searchfield.toLowerCase()){
+                matchedGraph.push(graph);
+                break;
+            }
+        }
+    }
+    if(matchedGraph){
+        return res.status(200).json(matchedGraph);
+    } else {
+        return res.status(400).json('Not found');
+    }
+
+    // graphData.forEach((graph) => {
+    //   let nodeList= graph.data.nodes;
+    //   console.log(graph);
+    //   nodeList.filter( node => {
+    //       console.log("I am searchfield: ",node.label);
+    //     if(node.label.toLowerCase()  === searchfield.toLowerCase()){
+    //         console.log(node.label," == ",searchfield);
+    //         matchedGraph.push(graph);
+    //     }
+    //     return res.status(200).json(matchedGraph);
+    //   });
+    // });
+    // return res.status(400).json('Not found');     
 })
 
 app.delete('/:id', (req, res) => {
@@ -121,23 +168,36 @@ app.delete('/:id', (req, res) => {
     for (i = 0; i < graphData.length; i++) {
         if(graphData[i].id === id) {
             graphData.splice(i, 1);
-            return res.send(graphData);
-            // return res.status(204);
+            // 5/21 10:16 modified the return: not return graphData
+            // return res.send(graphData);
+            return res.status(200).json({success: 'Graph deleted!'});
         }
     }
-    return res.status(404).json({error: 'Graph not found'});
+    return res.status(400).json({error: 'Graph not found'});
 })
 
 app.post('/', (req, res) => {
     const { name, data } = req.body;
+    // 5/21 13:17 Add if statement for invalid name
+    if (!name) {
+        return res.status(400).json({error: "Invalid params"});
+    }
     let newGraph = {
-        id: shortid.generate(),
+        // id: shortid.generate(),
+        id: name.toLowerCase().split(' ').join('_'),
         name: name,
         data: data
     };
+    // console.log(typeof(newGraph.id), typeof(newGraph.name));
     graphData.push(newGraph);
-    return res.send(graphData);
-    // return res.status(200).json({success: 'Created! Good job!'}); // TO DO: check the response
+    // 5/21 10:13 modified the return: not return graphData
+    // return res.send(graphData); 
+    return res.status(200).json(newGraph); // TO DO: check the response
 })
 
-app.listen(3001);
+const server = app.listen(PORT, () =>{
+    console.info(`App is now running on port ${PORT}!`)
+});
+
+
+module.exports = { app, server };
