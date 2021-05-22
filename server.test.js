@@ -35,6 +35,16 @@ describe('TEST server.js', () => {
           });
     });
 
+    it("GET /node:searchfield , should return graph where contains node id=serachfield", async () => {
+        const searchfield = "Node 3";
+        return request(app)
+          .get(`/node/${searchfield}`)
+          .expect(200)
+          .then(res => {
+            expect(res.body).toMatchSnapshot();
+          });
+    });
+
     it("DELETE /:id , should return success message when id=graph_1 deleted", async () => {
         const id = "grph_1";
         return request(app)
@@ -67,7 +77,6 @@ describe('TEST server.js', () => {
             .send(newGraph)
             .expect(200)
             .then(res => {
-            // console.log(res.body);
             expect(res.body).toMatchSnapshot();
             });
     });

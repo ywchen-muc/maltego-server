@@ -34,18 +34,38 @@ Array [
         Object {
           "id": "nd_1",
           "label": "Node 1",
+          "style": Object {
+            "label": Object {
+              "value": "Node 1",
+            },
+          },
         },
         Object {
           "id": "nd_2",
           "label": "Node 2",
+          "style": Object {
+            "label": Object {
+              "value": "Node 2",
+            },
+          },
         },
         Object {
           "id": "nd_3",
           "label": "Node 3",
+          "style": Object {
+            "label": Object {
+              "value": "Node 3",
+            },
+          },
         },
         Object {
           "id": "nd_4",
           "label": "Node 4",
+          "style": Object {
+            "label": Object {
+              "value": "Node 4",
+            },
+          },
         },
       ],
     },
@@ -64,10 +84,20 @@ Array [
         Object {
           "id": "nd_1",
           "label": "Node 1",
+          "style": Object {
+            "label": Object {
+              "value": "Node 1",
+            },
+          },
         },
         Object {
           "id": "nd_2",
           "label": "Node 2",
+          "style": Object {
+            "label": Object {
+              "value": "Node 2",
+            },
+          },
         },
       ],
     },
@@ -98,26 +128,56 @@ Array [
         Object {
           "id": "nd_1",
           "label": "Node 1",
+          "style": Object {
+            "label": Object {
+              "value": "Node 1",
+            },
+          },
         },
         Object {
           "id": "nd_2",
           "label": "Node 2",
+          "style": Object {
+            "label": Object {
+              "value": "Node 2",
+            },
+          },
         },
         Object {
           "id": "nd_3",
           "label": "Node 3",
+          "style": Object {
+            "label": Object {
+              "value": "Node 3",
+            },
+          },
         },
         Object {
           "id": "nd_4",
           "label": "Node 4",
+          "style": Object {
+            "label": Object {
+              "value": "Node 4",
+            },
+          },
         },
         Object {
           "id": "nd_5",
           "label": "Node 5",
+          "style": Object {
+            "label": Object {
+              "value": "Node 5",
+            },
+          },
         },
         Object {
           "id": "nd_6",
           "label": "Node 6",
+          "style": Object {
+            "label": Object {
+              "value": "Node 6",
+            },
+          },
         },
       ],
     },
@@ -150,24 +210,189 @@ Object {
       Object {
         "id": "nd_1",
         "label": "Node 1",
+        "style": Object {
+          "label": Object {
+            "value": "Node 1",
+          },
+        },
       },
       Object {
         "id": "nd_2",
         "label": "Node 2",
+        "style": Object {
+          "label": Object {
+            "value": "Node 2",
+          },
+        },
       },
       Object {
         "id": "nd_3",
         "label": "Node 3",
+        "style": Object {
+          "label": Object {
+            "value": "Node 3",
+          },
+        },
       },
       Object {
         "id": "nd_4",
         "label": "Node 4",
+        "style": Object {
+          "label": Object {
+            "value": "Node 4",
+          },
+        },
       },
     ],
   },
   "id": "grph_1",
   "name": "Graph 1",
 }
+`;
+
+exports[`TEST server.js GET /node:searchfield , should return error message when graph with the specified node is not found 1`] = `"Not found"`;
+
+exports[`TEST server.js GET /node:searchfield , should return graph where contains node id=serachfield 1`] = `
+Array [
+  Object {
+    "data": Object {
+      "edges": Array [
+        Object {
+          "source": "nd_1",
+          "target": "nd_2",
+        },
+        Object {
+          "source": "nd_1",
+          "target": "nd_3",
+        },
+        Object {
+          "source": "nd_1",
+          "target": "nd_4",
+        },
+      ],
+      "nodes": Array [
+        Object {
+          "id": "nd_1",
+          "label": "Node 1",
+          "style": Object {
+            "label": Object {
+              "value": "Node 1",
+            },
+          },
+        },
+        Object {
+          "id": "nd_2",
+          "label": "Node 2",
+          "style": Object {
+            "label": Object {
+              "value": "Node 2",
+            },
+          },
+        },
+        Object {
+          "id": "nd_3",
+          "label": "Node 3",
+          "style": Object {
+            "label": Object {
+              "value": "Node 3",
+            },
+          },
+        },
+        Object {
+          "id": "nd_4",
+          "label": "Node 4",
+          "style": Object {
+            "label": Object {
+              "value": "Node 4",
+            },
+          },
+        },
+      ],
+    },
+    "id": "grph_1",
+    "name": "Graph 1",
+  },
+  Object {
+    "data": Object {
+      "edges": Array [
+        Object {
+          "source": "nd_1",
+          "target": "nd_2",
+        },
+        Object {
+          "source": "nd_1",
+          "target": "nd_3",
+        },
+        Object {
+          "source": "nd_1",
+          "target": "nd_4",
+        },
+        Object {
+          "source": "nd_1",
+          "target": "nd_5",
+        },
+      ],
+      "nodes": Array [
+        Object {
+          "id": "nd_1",
+          "label": "Node 1",
+          "style": Object {
+            "label": Object {
+              "value": "Node 1",
+            },
+          },
+        },
+        Object {
+          "id": "nd_2",
+          "label": "Node 2",
+          "style": Object {
+            "label": Object {
+              "value": "Node 2",
+            },
+          },
+        },
+        Object {
+          "id": "nd_3",
+          "label": "Node 3",
+          "style": Object {
+            "label": Object {
+              "value": "Node 3",
+            },
+          },
+        },
+        Object {
+          "id": "nd_4",
+          "label": "Node 4",
+          "style": Object {
+            "label": Object {
+              "value": "Node 4",
+            },
+          },
+        },
+        Object {
+          "id": "nd_5",
+          "label": "Node 5",
+          "style": Object {
+            "label": Object {
+              "value": "Node 5",
+            },
+          },
+        },
+        Object {
+          "id": "nd_6",
+          "label": "Node 6",
+          "style": Object {
+            "label": Object {
+              "value": "Node 6",
+            },
+          },
+        },
+      ],
+    },
+    "id": "grph_3",
+    "name": "Graph 3",
+  },
+]
 `;
 
 exports[`TEST server.js POST / , should return error if name is null 1`] = `

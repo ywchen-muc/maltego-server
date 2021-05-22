@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 // const bodyParser = require('body-parser');
-// const fs = require('fs');
 const shortid = require('shortid');
 
 const PORT = 3001;
@@ -114,9 +113,7 @@ processNodeLabel = (graphs) => {
     return graphs;
 };
 app.get('/', (req, res) => {
-    // 5/21 10:32 modified the return:
     return res.status(200).json(processNodeLabel(graphData));
-    // return res.status.send(graphData)
 })
 
 app.get('/:graphId', (req, res) => {
@@ -146,21 +143,7 @@ app.get('/node/:searchfield', (req, res) => {
         return res.status(200).json(matchedGraph);
     } else {
         return res.status(400).json('Not found');
-    }
-
-    // graphData.forEach((graph) => {
-    //   let nodeList= graph.data.nodes;
-    //   console.log(graph);
-    //   nodeList.filter( node => {
-    //       console.log("I am searchfield: ",node.label);
-    //     if(node.label.toLowerCase()  === searchfield.toLowerCase()){
-    //         console.log(node.label," == ",searchfield);
-    //         matchedGraph.push(graph);
-    //     }
-    //     return res.status(200).json(matchedGraph);
-    //   });
-    // });
-    // return res.status(400).json('Not found');     
+    }  
 })
 
 app.delete('/:id', (req, res) => {
@@ -168,8 +151,6 @@ app.delete('/:id', (req, res) => {
     for (i = 0; i < graphData.length; i++) {
         if(graphData[i].id === id) {
             graphData.splice(i, 1);
-            // 5/21 10:16 modified the return: not return graphData
-            // return res.send(graphData);
             return res.status(200).json({success: 'Graph deleted!'});
         }
     }
@@ -178,7 +159,6 @@ app.delete('/:id', (req, res) => {
 
 app.post('/', (req, res) => {
     const { name, data } = req.body;
-    // 5/21 13:17 Add if statement for invalid name
     if (!name) {
         return res.status(400).json({error: "Invalid params"});
     }
@@ -188,10 +168,7 @@ app.post('/', (req, res) => {
         name: name,
         data: data
     };
-    // console.log(typeof(newGraph.id), typeof(newGraph.name));
     graphData.push(newGraph);
-    // 5/21 10:13 modified the return: not return graphData
-    // return res.send(graphData); 
     return res.status(200).json(newGraph); // TO DO: check the response
 })
 
