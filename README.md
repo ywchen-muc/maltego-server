@@ -1,9 +1,5 @@
 # Maltego Interview Challenge - Server
 
-[![MIT License][license-shield]][license-url]
-
-
-
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary>Table of Contents</summary>
@@ -61,6 +57,7 @@ Please make sure you have npm installed with latest version in the environment.
 1. Clone the repo
    ```sh
    git clone https://github.com/ywchen-muc/maltego-server
+   cd maltego-server
    ```
 2. Install NPM packages
    ```sh
